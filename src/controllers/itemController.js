@@ -20,6 +20,16 @@ class ItemController {
     }
   }
 
+  static async getItemByCategoria(req, res) {
+    const categoria = req.query.categoria;
+    try {
+      const getItem = await item.find({ categoria: categoria });
+      res.status(200).json(getItem);
+    } catch (error) {
+      res.status(500).json({ message: `${error.message} - Falha ao buscar item.` })
+    }
+  }
+
   static async createItens(req, res) {
     try {
       const newItem = await item.create(req.body)
